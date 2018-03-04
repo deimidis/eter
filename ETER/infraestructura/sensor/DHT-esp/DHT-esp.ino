@@ -1,4 +1,7 @@
 //include library 
+
+#include <ESP8266WiFi.h>
+
 #include <Adafruit_MQTT.h>
 #include <Adafruit_MQTT_Client.h>
 
@@ -20,10 +23,27 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
-  Serial.begin(9600);
-  Serial.println("DHTxx test!");
 
+  Serial.begin(9600);
+  Serial.println();
+   WiFi.begin("Nodito", "felix814depto");
+
+  Serial.print("Connecting");
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println();
+
+  Serial.print("Connected, IP address: ");
+  Serial.println(WiFi.localIP());
+  
+  
+  
   dht.begin();
+
+
 }
 
 void loop() {
